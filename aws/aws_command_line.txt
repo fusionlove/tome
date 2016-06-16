@@ -1,0 +1,5 @@
+aws configure
+
+aws elasticbeanstalk describe-configuration-options
+
+aws elasticbeanstalk list-available-solution-stacks

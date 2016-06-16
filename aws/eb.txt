@@ -1,0 +1,1 @@
+If anything goes wrong during the deployment process, the /var/app/current folder will be empty.

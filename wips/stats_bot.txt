@@ -1,0 +1,2 @@
+http://ddd23e3a695e91:ddd1284e53a168a5ad955485a7c83b10de0@localhost:3000/update
+http://ddd23e3a695e91:ddd1284e53a168a5ad955485a7c83b10de0@statsbot.us-east-1.elasticbeanstalk.com:3000/update

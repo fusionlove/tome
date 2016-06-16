@@ -1,0 +1,1 @@
+http://2510c39:3b2f3baf2d708369340083e703449337:userscoring-s1.us-east-1.elasticbeanstalk.com/score_all

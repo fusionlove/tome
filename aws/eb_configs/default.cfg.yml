@@ -1,0 +1,9 @@
+This has to go in the .ebextensions folder, which thus must  not be on the gitignore.
+Tested - works!
+DOES NOT WORK WHEN LAUNCHING USING ANGEL EITHER
+
+SolutionStack: 64bit Amazon Linux 2015.09 v2.0.8 running Ruby 2.2 (Puma)
+OptionSettings:
+  aws:autoscaling:launchconfiguration:
+    IamInstanceProfile: aws-elasticbeanstalk-ec2-role
+    EC2KeyName: fling-eb-services

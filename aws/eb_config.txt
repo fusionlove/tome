@@ -1,0 +1,49 @@
+The Resources key allows creation of resources - any kind of CloudFormation resources are supported.
+
+This is what the autoscaling group health check looks like.
+
+Example:
+
+Resources:
+  hookrole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument: {
+               "Version" : "2012-10-17",
+               "Statement": [ {
+                  "Effect": "Allow",
+                  "Principal": {
+                     "Service": [ "autoscaling.amazonaws.com" ]
+                  },
+                  "Action": [ "sts:AssumeRole" ]
+               } ]
+            }
+      Policies: [ {
+               "PolicyName": "SNS",
+               "PolicyDocument": {
+                      "Version": "2012-10-17",
+                      "Statement": [{
+                          "Effect": "Allow",
+                          "Resource": "*",
+                          "Action": [
+                              "sqs:SendMessage",
+                              "sqs:GetQueueUrl",
+                              "sns:Publish"
+                          ]
+                        }
+                      ]
+                  }
+               } ]
+  hooktopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: "my-email@example.com"
+          Protocol: email
+  lifecyclehook:
+    Type: AWS::AutoScaling::LifecycleHook
+    Properties:
+      AutoScalingGroupName: { "Ref" : "AWSEBAutoScalingGroup" }
+      LifecycleTransition: autoscaling:EC2_INSTANCE_TERMINATING
+      NotificationTargetARN: { "Ref" : "hooktopic" }
+      RoleARN: { "Fn::GetAtt" : [ "hookrole", "Arn"] }
